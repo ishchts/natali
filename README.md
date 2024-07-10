@@ -4,4 +4,7 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/a2426a9d5821cc7fbe22/maintainability)](https://codeclimate.com/github/NatShulga/frontend-project-11/maintainability)
 
 
-RSS aggregator
+RSS - AGRREGATOR 
+
+~ Is a web application which helps you to read a variety of sources, for example, blogs. 
+It allows you to add an unlimited number of RSS feeds, updates them automatically and adds new entries to the main feed.
