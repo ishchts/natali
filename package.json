@@ -26,6 +26,7 @@
   },
   "name": "my-webpack-project",
   "version": "1.0.0",
+  "type": "module",
   "description": "My webpack project",
   "main": "index.js",
   "dependencies": {
