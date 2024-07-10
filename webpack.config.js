@@ -11,8 +11,8 @@ export default {
   mode: 'development',
   entry: './src/index.js',
   output: {
-    filename: 'bundle.js',
-    path: path.resolve(dirname, 'dist'),
+    filename: 'node.js',
+    path: path.resolve(dirname, 'pablic'),
     clean: true,
   },
   devServer: {
