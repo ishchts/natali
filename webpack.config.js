@@ -12,7 +12,7 @@ export default {
   entry: './src/index.js',
   output: {
     filename: 'node.js',
-    path: path.resolve(dirname, 'dist'),
+    path: path.resolve(dirname, 'public'),
     clean: true,
   },
   devServer: {
