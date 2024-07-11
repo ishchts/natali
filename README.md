@@ -6,3 +6,6 @@ RSS - AGRREGATOR
 
 ~ Is a web application which helps you to read a variety of sources, for example, blogs. 
 It allows you to add an unlimited number of RSS feeds, updates them automatically and adds new entries to the main feed.
+
+
+https://frontend-project-11-bxta-qvzy8kbed-natas-projects-d62987c0.vercel.app/
