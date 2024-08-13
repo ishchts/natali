@@ -60,6 +60,7 @@
     "mime-types": "^2.1.35",
     "neo-async": "^2.6.2",
     "node-releases": "^2.0.14",
+    "on-change": "^5.0.1",
     "picocolors": "^1.0.1",
     "punycode": "^2.3.1",
     "randombytes": "^2.1.0",
@@ -76,7 +77,8 @@
     "update-browserslist-db": "^1.1.0",
     "uri-js": "^4.4.1",
     "watchpack": "^2.4.1",
-    "webpack-sources": "^3.2.3"
+    "webpack-sources": "^3.2.3",
+    "yup": "^1.4.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
