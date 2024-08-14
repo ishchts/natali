@@ -6,7 +6,9 @@ export const validateUrl = (url, existingUrls) => {
   return urlSchema.validate(url)
     .then(() => {
       if (existingUrls.includes(url)) {
-        throw new Error('URL уже существует');
+        return Promise.reject(new Error('URL уже существует'));
       }
+      return Promise.resolve();
     });
 };
+
