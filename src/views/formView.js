@@ -10,8 +10,8 @@ export const initializeFormView = (state, validateUrl) => {
   // Создание отслеживаемого состояния
   const watchedState = onChange(state, (path, value) => {
     if (path === 'error') {
-      feedback.textContent = value; // Текст сообщения об ошибке
-      input.classList.toggle('is-invalid', !!value); // Добавление или удаление класса
+      input.classList.remove('is-valid', 'is-invalid'); // Удаляем все классы
+      input.classList.add(value ? 'is-invalid' : 'is-valid'); // Добавляем нужный в зависомости от результата валидации
     }
   });
 

@@ -39,16 +39,13 @@ export const initializeFormView = (state, validateUrl) => {
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
     watchedState.error = null; // Сброс ошибки
-
     try {
       await validateUrl(watchedState.url, feeds); // Вызов функции валидации URL
       feeds.push(watchedState.url);
       watchedState.url = ''; // Если валидация успешна, добавляем URL в feeds и очищаем поле ввода
       input.value = '';
       input.focus();
-      
       // Отправка ссылок и парсинг
-      // Здесь добавьте код для отправки ссылок и парсинга
     } catch (error) {
       watchedState.error = error.message; // Если валидация неуспешна, устанавливаем сообщение об ошибке
     }
@@ -56,6 +53,7 @@ export const initializeFormView = (state, validateUrl) => {
 
   // Обработчик события ввода
   input.addEventListener('input', (event) => {
+    watchedState.error = null; // Очищаем сообщение об ошибке при вводе нового значения
     watchedState.url = event.target.value;
   });
 };
