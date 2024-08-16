@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap';
-import { validateUrl } from './src/validators/urlValidator';
-import { state } from './src/state/state';
+import { validateUrl } from 'src/validators/urlValidator';
+import { state } from 'src/state/state';
 
 
 
