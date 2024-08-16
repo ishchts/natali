@@ -1,7 +1,8 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap';
-import { validateUrl } from './validators/urlValidator';
-import { state } from './state/state';
+import { validateUrl } from './src/validators/urlValidator';
+import { state } from './src/state/state';
+
 
 
 document.addEventListener('DOMContentLoaded', () => {

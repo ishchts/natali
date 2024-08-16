@@ -31,7 +31,7 @@ export default {
     },
   },
   plugins: [
-    new HtmlWebpackPlugin({ template: 'index.html' })
+    new HtmlWebpackPlugin({ template: './src/index.html' })
   ],
   optimization: {
     minimize: true,
