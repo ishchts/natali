@@ -1,39 +1,66 @@
 import onChange from 'on-change';
 
 export const initializeFormView = (state, validateUrl) => {
-  // Получение элементов формы
   const form = document.querySelector('#rss-form');
   const input = form.querySelector('input[name="url"]');
-  const feedback = form.querySelector('.feedback');
-  const feeds = [];
+  const feedback = document.querySelector('.feedback');
 
-  // Создание отслеживаемого состояния
   const watchedState = onChange(state, (path, value) => {
     if (path === 'error') {
-      input.classList.remove('is-valid', 'is-invalid'); // Удаляем все классы
-      input.classList.add(value ? 'is-invalid' : 'is-valid'); // Добавляем нужный в зависомости от результата валидации
+      if (value) {
+        renderError(input, value);
+      } else {
+        clearError(input);
+      }
     }
   });
+
+  //функция для проверки валидности URL
+  const isValidUrl = (string) => {
+    try {
+      new URL(string);
+      return true;
+    } catch (_) {
+      return false;
+    }
+  };
 
   // Обработчик события отправки формы
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
-    watchedState.error = null; // Сброс ошибки
+    watchedState.error = null;
 
-    try {
-      await validateUrl(watchedState.url, feeds); // Вызов функции валидации URL
-      feeds.push(watchedState.url);
-      watchedState.url = ''; // Если валидация успешна, добавляем URL в feeds и очищаем поле ввода
-      input.value = '';
-      input.focus();
-    } catch (error) {
-      watchedState.error = error.message; // Если валидация неуспешна, устанавливаем сообщение об ошибке
+    const url = input.value.trim();
+
+    if (isValidUrl(url)) {
+      input.classList.remove('is-invalid');
+      input.classList.add('is-valid');
+      feedback.style.display = 'none';
+    } else {
+      input.classList.remove('is-valid');
+      input.classList.add('is-invalid');
+      feedback.style.display = 'block';
+      watchedState.error = 'Invalid URL';
     }
   });
 
   // Обработчик события ввода
-  input.addEventListener('input', (event) => {
-    watchedState.url = event.target.value;
+  input.addEventListener('input', () => {
+    input.classList.remove('is-invalid', 'is-valid');
+    feedback.style.display = 'none';
+    watchedState.error = null;
   });
-};
 
+  // Функции для управления ошибками
+  const renderError = (inputElement, errorMessage) => {
+    inputElement.classList.add('is-invalid');
+    feedback.textContent = errorMessage;
+    feedback.style.display = 'block';
+  };
+
+  const clearError = (inputElement) => {
+    inputElement.classList.remove('is-invalid');
+    inputElement.classList.add('is-valid');
+    feedback.style.display = 'none';
+  };
+};
