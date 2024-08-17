@@ -35,17 +35,30 @@ export const initializeFormView = (state, validateUrl) => {
     }
   });
 
-  // Обработчик события отправки формы
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
     watchedState.error = null; // Сброс ошибки
+  
     try {
-      await validateUrl(watchedState.url, feeds); // Вызов функции валидации URL
-      feeds.push(watchedState.url);
-      watchedState.url = ''; // Если валидация успешна, добавляем URL в feeds и очищаем поле ввода
+      // Валидация URL
+      await validateUrl(watchedState.url, feeds);
+  
+      // Если валидация успешна, выполняем запрос на сервер для получения данных
+      const response = await fetch(`https://allorigins.hexlet.app/get?disableCache=true=${encodeURIComponent(watchedState.url)}`);
+      if (!response.ok) {
+        throw new Error('Ошибка запроса');
+      }
+  
+      const data = await response.json(); // Парсинг ответа сервера
+  
+      // Сохраняем результат в состояние
+      feeds.push({ url: watchedState.url, data });
+      
+      // Очищаем поле ввода после успешного запроса и сохранения данных
+      watchedState.url = '';
       input.value = '';
       input.focus();
-      // Отправка ссылок и парсинг
+  
     } catch (error) {
       watchedState.error = error.message; // Если валидация неуспешна, устанавливаем сообщение об ошибке
     }
