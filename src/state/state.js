@@ -1,6 +1,6 @@
+import onChange from 'on-change';
 
-
-export const state = ({
+export const state = onChange({
   url: '',
   error: null,
   isValid: false
