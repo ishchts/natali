@@ -4,19 +4,19 @@ import { fileURLToPath } from 'url';
 import path from 'path';
 import autoprefixer from 'autoprefixer';
 
-const filename = fileURLToPath(import.meta.url);
-const dirname = path.dirname(filename);
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export default {
-  mode: 'development',
-  entry: './src/index.js',
+  mode: process.env.NODE_ENV || 'development',
+  entry: path.resolve(__dirname, './src/index.js'),
   output: {
     filename: 'node.js',
-    path: path.resolve(dirname, 'public'),
+    path: path.resolve(__dirname, './dist/'),
     clean: true,
   },
   devServer: {
-    static: path.resolve(dirname, 'dist'),
+    static: path.resolve(__dirname, 'dist'),
     port: 8080,
     hot: true,
     watchFiles: ['src/**/*'],
@@ -31,7 +31,9 @@ export default {
     },
   },
   plugins: [
-    new HtmlWebpackPlugin({ template: 'index.html' })
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, 'index.html'),
+    }),
   ],
   optimization: {
     minimize: true,

@@ -16,4 +16,3 @@ function validateUrl(url) {
     state.error = 'Invalid URL';
   }
 }
-validateUrl();
