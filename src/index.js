@@ -1,10 +1,23 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap';
-import { validateUrl } from './validators/urlValidator.js';
-import { state } from './state/state.js';
+import * as yup from 'yup';
+import { addFeed, getFeeds } from '../state/state.js';
+import { initializeFormView } from '../views/formView.js';
 
+// Схема валидации URL с использованием yup
+const urlSchema = yup.string().url('Некорректный URL').required('URL обязателен');
 
+// Функция валидации
+export const validateUrl = async (url, existingFeeds) => {
+  await urlSchema.validate(url);
 
-document.addEventListener('DOMContentLoaded', () => {
-    initializeFormView(state, validateUrl);
-  });
+  if (existingFeeds.some((feed) => feed.url === url)) {
+    throw new Error('URL уже существует');
+  }
+
+  addFeed(url);
+};
+
+// Функция инициализации контроллера
+export const initializeController = () => {
+  const state = { error: null, feeds: getFeeds() };
+  initializeFormView(state, validateUrl);
+};

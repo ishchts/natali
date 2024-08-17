@@ -1,18 +1,9 @@
-import onChange from 'on-change';
+const state = {
+  feeds: [], // Список добавленных RSS-потоков
+};
 
-export const state = onChange({
-  url: '',
-  error: null,
-  isValid: false
-});
+export const addFeed = (url) => {
+  state.feeds.push({ url });
+};
 
-function validateUrl(url) {
-  // Добавляем логику валидации URL
-  if (isValidUrl(url)) {
-    state.isValid = true; // Успешная валидация
-    state.url = url; // Сохраняем валидный URL
-  } else {
-    state.isValid = false;
-    state.error = 'Invalid URL';
-  }
-}
+export const getFeeds = () => state.feeds;
