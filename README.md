@@ -10,5 +10,3 @@ It allows you to add an unlimited number of RSS feeds, updates them automaticall
 
 
 https://frontend-project-11-bxta-qvzy8kbed-natas-projects-d62987c0.vercel.app/
-
-Проверка на обновление ссылки версель...
