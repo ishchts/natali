@@ -1,5 +1,6 @@
 import onChange from 'on-change';
 
+
 export const initializeFormView = (state, validateUrl) => {
   const form = document.querySelector('#rss-form');
   const input = form.querySelector('input[name="url"]');
