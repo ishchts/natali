@@ -1,8 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap';
-import { validateUrl } from './validators/urlValidator.js';
-import { state } from './state/state.js';
-
+import state from './state/state';
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -17,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
       },
     })
     .then(() => {
-      app(i18nextInstance);
+      state(i18nextInstance);
     })
     .catch((error) => {
       console.log(`Failed to initialize app: ${error}`);
