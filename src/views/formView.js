@@ -15,7 +15,7 @@ export const initializeFormView = (state, validateUrl) => {
     }
   });
 
-  //функция для проверки валидности URL
+
   const isValidUrl = (string) => {
     try {
       new URL(string);
@@ -25,7 +25,6 @@ export const initializeFormView = (state, validateUrl) => {
     }
   };
 
-  // Обработчик события отправки формы
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
     watchedState.error = null;
@@ -44,14 +43,12 @@ export const initializeFormView = (state, validateUrl) => {
     }
   });
 
-  // Обработчик события ввода
   input.addEventListener('input', () => {
     input.classList.remove('is-invalid', 'is-valid');
     feedback.style.display = 'none';
     watchedState.error = null;
   });
 
-  // Функции для управления ошибками
   const renderError = (inputElement, errorMessage) => {
     inputElement.classList.add('is-invalid');
     feedback.textContent = errorMessage;

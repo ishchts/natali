@@ -1,91 +1,77 @@
 import * as yup from "yup";
 import onChange from "on-change";
 
-// Определение схемы валидации URL с помощью yup
-const urlSchema = yup
-  .string()
-  .url("Некорректный URL")
-  .required("URL обязателен");
+const urlSchema = yup.string().url().required();
 
-// Функция для валидации URL (синхронная версия)
-export const validateUrl = (url, existingUrls) => {
+const validateUrl = async (url, existingUrls) => {
+  if (!existingUrls) return "Ошибка: список существующих URL пуст";
   try {
-    // Валидация URL с использованием схемы
-    urlSchema.validateSync(url);
+    const rssRegex = /feed\b|\bfeed\.xml$/i; 
 
-    // Проверка на существование URL в массиве existingUrls
-    if (existingUrls.includes(url)) {
-      return "URL уже существует";
+    if (!rssRegex.test(url)) {
+      return 'Ссылка не является RSS-потоком';
     }
-    return null; // URL валиден и не дублируется
+
+    await urlSchema.validate(url);
+    if (existingUrls.includes(url)) {
+      return 'URL уже существует';
+    }
+    return null;
   } catch (error) {
-    return error.message; // Возвращаем сообщение об ошибке
+    return error.message;
   }
 };
 
-// Функция для инициализации представления формы
-export const initializeFormView = (validateUrl) => {
-  // Получение элементов формы
-  const form = document.querySelector("#rss-form");
+const initializeFormView = () => {
+  const form = document.querySelector('#rss-form');
   const input = form.querySelector('input[name="url"]');
-  const feedback = form.querySelector(".feedback");
+  const feedback = form.querySelector('.feedback');
   const feeds = [];
 
-  // Создание отслеживаемого состояния
-  const state = {
-    url: "",
-    error: null,
-  };
+  const state = { url: '', error: null };
   const watchedState = onChange(state, (path, value) => {
-    if (path === "error") {
-      feedback.textContent = value; // Текст сообщения об ошибке
-      input.classList.toggle("is-invalid", !!value); // Добавление или удаление класса
+    if (path === 'error') {
+      feedback.textContent = value;
+      input.classList.toggle('is-invalid', !!value);
     }
-    if (path === "url") {
-      input.value = value; // Синхронизация значения ввода с состоянием
+    if (path === 'url') {
+      input.value = value;
     }
   });
 
-  form.addEventListener("submit", (event) => {
+  form.addEventListener('submit', async (event) => {
     event.preventDefault();
-    watchedState.error = null; // Сброс ошибки
+    watchedState.error = null;
+    const error = await validateUrl(watchedState.url, feeds);
 
-    // Валидация URL
-    const error = validateUrl(watchedState.url, feeds);
     if (error) {
-      watchedState.error = error; // Устанавливаем сообщение об ошибке
+      watchedState.error = error;
       return;
     }
 
-    // Если валидация успешна, выполняем запрос на сервер для получения данных
-    fetch(
-      `https://allorigins.hexlet.app/get?disableCache=true&url=${encodeURIComponent(watchedState.url)}`
-    )
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Ошибка запроса");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        // Сохраняем результат в состояние
-        feeds.push({ url: watchedState.url, data });
-
-        // Очищаем поле ввода после успешного запроса и сохранения данных
-        watchedState.url = "";
-        input.focus();
-      })
-      .catch((error) => {
-        watchedState.error = error.message; // Если валидация неуспешна, устанавливаем сообщение об ошибке
-      });
+    try {
+      const response = await fetch(
+        `https://allorigins.hexlet.app/get?disableCache=true&url=${encodeURIComponent(watchedState.url)}`
+      );
+      if (!response.ok) {
+        throw new Error('Ошибка запроса');
+      }
+      const data = await response.json();
+      feeds.push({ url: watchedState.url, data });
+      watchedState.url = '';
+      input.focus();
+      watchedState.error = null;
+      input.classList.remove("is-invalid")
+    } catch (error) {
+      watchedState.error = error.message;
+    }
   });
 
-  // Обработчик события ввода
-  input.addEventListener("input", (event) => {
-    watchedState.error = null; // Очищаем сообщение об ошибке при вводе нового значения
+  input.addEventListener('input', (event) => {
+    watchedState.error = null;
     watchedState.url = event.target.value;
+    input.classList.remove("is-invalid")
   });
 };
 
-// Инициализация представления формы
-initializeFormView(validateUrl);
+initializeFormView();
