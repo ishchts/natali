@@ -5,6 +5,7 @@ import onChange from 'on-change';
 import axios from 'axios';
 import render from './formView.js';
 import { uniqueIDGenerator, createProxyUrl } from './utils.js';
+import parserRSS from '../rss-parser.js';
 
 export default (i18nextInstance) => {
   setLocale({
@@ -16,7 +17,7 @@ export default (i18nextInstance) => {
     },
   });
 
-  const fillContent = (elements, i18n) => {
+  const fillElemContent = (elements, i18n) => {
     elements.modalCloseButton.textContent = i18n.t('modalWindow.close');
     elements.modalReadButton.textContent = i18n.t('modalWindow.read');
     elements.headerTitle.textContent = i18n.t('header.title');
@@ -39,7 +40,7 @@ export default (i18nextInstance) => {
     modalWindow: document.querySelector('.modal'),
   };
 
-  fillContent(elements, i18nextInstance);
+  fillElemContent(elements, i18nextInstance);
 
   const createValidationSchema = (existingUrls) => object({
     urlValue: string().url().notOneOf(existingUrls, 'form.errors.rssExists'),
@@ -94,7 +95,7 @@ export default (i18nextInstance) => {
             && response.data.status.http_code !== 404
           ) {
             try {
-              const parsedRSS = parsRSS(response.data.contents);
+              const parsedRSS = parserRSS(response.data.contents);
               const newPosts = parsedRSS.posts
                 .filter(
                   (post) => !state.posts.some(
@@ -141,7 +142,7 @@ export default (i18nextInstance) => {
   const handleFormResponse = (response, urlValue) => {
     if (response.data) {
       try {
-        const parsedRSS = parsRSS(response.data.contents);
+        const parsedRSS = parserRSS(response.data.contents);
         const urlID = uniqueIDGenerator.generateID();
         state.urls.push({ id: urlID, link: urlValue });
         const posts = parsedRSS.posts.map((post) => ({
