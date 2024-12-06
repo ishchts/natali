@@ -4,7 +4,7 @@ import { object, string, setLocale } from 'yup';
 import onChange from 'on-change';
 import axios from 'axios';
 import render from './formView.js';
-import { uniqueIDGenerator, createProxyUrl } from './utils.js';
+import { uniqueIDGenerator, createProxyUrl } from '../validators/urlValidator.js';
 import parserRSS from '../rss-parser.js';
 
 export default (i18nextInstance) => {

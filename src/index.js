@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap';
-import state from './state/state';
+import state from './state/state.js';
 
 
 document.addEventListener('DOMContentLoaded', () => {
