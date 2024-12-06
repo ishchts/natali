@@ -5,7 +5,6 @@ import onChange from 'on-change';
 import axios from 'axios';
 import render from './formView.js';
 import { uniqueIDGenerator, createProxyUrl } from './utils.js';
-import parserRSS from './parser-rss.js';
 
 export default (i18nextInstance) => {
   setLocale({
