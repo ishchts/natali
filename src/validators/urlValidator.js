@@ -1,7 +1,7 @@
-const getTextFromHtml = (str) => {
-  const regex = />([^<]+)</;
-  const match = str.match(regex);
-  return match ? match[1] : str;
+const getTextFromHtml = (html) => {
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(html, 'text/html');
+  return doc.body.textContent.trim();
 };
 
 const createProxyUrl = (url) => {

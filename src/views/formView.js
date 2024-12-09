@@ -1,7 +1,5 @@
 import { extractTextFromHtml } from '../validators/urlValidator.js';
 
-extractTextFromHtml();
-
 const updateInputView = (state, formInput) => {
   const { urlValue } = state.form.input;
   const hasError = Boolean(state.form.error);
