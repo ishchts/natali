@@ -3,7 +3,7 @@ import '../scss/style.scss';
 import { object, string, setLocale } from 'yup';
 import onChange from 'on-change';
 import axios from 'axios';
-import render from './formView.js';
+import render from '../views/formView.js';
 import { uniqueIDGenerator, createProxyUrl } from '../validators/urlValidator.js';
 import parserRSS from '../rss-parser.js';
 
