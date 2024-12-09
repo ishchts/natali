@@ -1,5 +1,4 @@
-
-
+import { extractTextFromHtml } from '../validators/urlValidator';
 
 const updateInputView = (state, formInput) => {
   const { urlValue } = state.form.input;
