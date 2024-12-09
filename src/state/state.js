@@ -1,5 +1,5 @@
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
-import './scss/styles.scss';
+import '../scss/style.scss';
 import { object, string, setLocale } from 'yup';
 import onChange from 'on-change';
 import axios from 'axios';
