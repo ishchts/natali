@@ -1,4 +1,4 @@
-import { extractTextFromHtml } from '../validators/urlValidator.js';
+import { getTextFromHtml } from '../validators/urlValidator.js';
 
 const updateInputView = (state, formInput) => {
   const { urlValue } = state.form.input;
@@ -108,7 +108,7 @@ const updateModalView = (state) => {
     );
 
     modalTitle.textContent = postTitle;
-    modalBody.textContent = extractTextFromHtml(postDescription);
+    modalBody.textContent = getTextFromHtml(postDescription);
     modalRead.setAttribute('href', postHref);
   }
 };
