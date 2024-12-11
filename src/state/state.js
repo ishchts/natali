@@ -1,4 +1,3 @@
-//import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import { object, string, setLocale } from 'yup';
 import onChange from 'on-change';
 import axios from 'axios';
