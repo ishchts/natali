@@ -16,7 +16,8 @@
     "lodash": "^4.17.21",
     "on-change": "^5.0.1",
     "rss-parser": "^3.13.0",
-    "yup": "^1.4.0"
+    "yup": "^1.4.0",
+    "prettier": "^3.4.2"
   },
   "devDependencies": {
     "@babel/core": "^7.24.4",
@@ -32,7 +33,7 @@
     "mini-css-extract-plugin": "^2.9.0",
     "postcss-loader": "^8.1.1",
     "postcss-preset-env": "^9.5.14",
-    "prettier": "^3.1.1",
+    "prettier": "^3.4.2",
     "sass": "^1.77.2",
     "sass-loader": "^14.2.1",
     "style-loader": "^4.0.0",
