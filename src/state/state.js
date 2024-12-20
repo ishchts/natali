@@ -68,11 +68,10 @@ export default (i18nextInstance) => {
     return validationSchema
       .validate(input)
       .then(() => {
-        state.form.error = '';
+        return null;
       })
       .catch((error) => {
-        state.form.error = error.message;
-        throw error;
+        return error.message;
       });
   };
 
@@ -88,10 +87,8 @@ export default (i18nextInstance) => {
         .get(proxyUrl)
         .then((response) => {
           if (
-            response.data
-            && response.data.status
-            && response.data.status.http_code !== 404
-          ) {
+            response.status >= 200 && response.status < 300) 
+          {
             try {
               const parsedRSS = parserRSS(response.data.contents);
               const newPosts = parsedRSS.posts

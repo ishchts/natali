@@ -22,6 +22,7 @@ export default {
         read: 'Читать полностью',
       },
       errors: {
+        "error.appInitFailed": "Failed to initialize app: {{error}}",
         invalidRSS: 'Ресурс не содержит валидный RSS',
         responseError: 'Нет ответа от сервера',
         requestError: 'Ошибка сети',

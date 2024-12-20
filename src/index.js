@@ -5,21 +5,22 @@ import i18next from 'i18next';
 import state from './state/state.js';
 
 
-document.addEventListener('DOMContentLoaded', () => {
+async function initApp() {
   const { ru } = resources;
   const i18nextInstance = i18next.createInstance();
-  i18nextInstance
-    .init({
-      lng: 'ru',
-      debug: true,
-      resources: {
-        ru,
-      },
-    })
-    .then(() => {
+  try{
+    await i18nextInstance.init({
+          lng: 'ru',
+          debug: true,
+          resources: {
+            ru,
+          },
+        });
       state(i18nextInstance);
-    })
-    .catch((error) => {
-      console.log(`Failed to initialize app: ${error}`);
-    });
-  });
+      }
+  catch (error) {
+          console.log(errorMessage);
+      };
+}
+
+initApp();
