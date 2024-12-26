@@ -8,7 +8,7 @@ export default {
         input: 'Ссылка RSS',
         submit: 'Добавить',
         errors: {
-          enterValidURL: 'Ресурс не содержит валидный RSS',
+          enterValidURL: 'Ссылка должна быть валидным URL',
           rssExists: 'RSS уже существует',
         },
       },
