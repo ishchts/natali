@@ -8,7 +8,7 @@ export default {
         input: 'Ссылка RSS',
         submit: 'Добавить',
         errors: {
-          enterValidURL: 'Ссылка должна быть валидным URL',
+          enterValidURL: 'Ресурс не содержит валидный RSS',
           rssExists: 'RSS уже существует',
         },
       },
@@ -23,7 +23,7 @@ export default {
       },
       errors: {
         "error.appInitFailed": "Failed to initialize app: {{error}}",
-        invalidRSS: 'Ссылка должна быть валидным URL',
+        invalidRSS: 'Ресурс не содержит валидный RSS',
         responseError: 'Нет ответа от сервера',
         requestError: 'Ошибка сети',
       },
