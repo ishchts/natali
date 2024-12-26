@@ -71,7 +71,7 @@ export default (i18nextInstance) => {
         return null;
       })
       .catch((error) => {
-        return error.message;
+        throw new Error(error.message);
       });
   };
 
