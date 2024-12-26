@@ -23,7 +23,7 @@ export default {
       },
       errors: {
         "error.appInitFailed": "Failed to initialize app: {{error}}",
-        invalidRSS: 'Ресурс не содержит валидный RSS',
+        invalidRSS: 'Ссылка должна быть валидным URL',
         responseError: 'Нет ответа от сервера',
         requestError: 'Ошибка сети',
       },
