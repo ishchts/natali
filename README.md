@@ -8,5 +8,5 @@ RSS - AGRREGATOR
 ~ RSS (Rich Site Summary) is an automatically generated summary in rss or xml format, which displays recently published articles and news. At the same time, a hyperlink is given to the full version of the specified materials. This format is very often used by information portals and blogs.
 
 
-https://frontend-project-11-pmkz.vercel.app/
+https://frontend-project-11-natas-projects-d62987c0.vercel.app/
 
