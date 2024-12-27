@@ -127,23 +127,10 @@ export default (i18nextInstance) => {
         watchedState.posts.unshift(...newPosts);
       })
       .catch((error) => {
-        if (error.message === 'form.errors.enterValidURL') {
-          watchedState.form.error = error.message;
-          watchedState.form.request = 'failed';
-          return;
-        }
-        if (
-          error.message === 'form.errors.rssExists'
-          || error.name === 'ValidationError'
-        ) {
-          watchedState.form.error = error.message;
-          watchedState.form.request = 'failed';
-        } else {
-          handleFormError(error);
-        }
+        console.log('Failed to update URLs:', error);
       })
       .finally(() => {
-        elements.formInput.focus();
+        setTimeout(checkForUpdates, 5000);
       });
   };
 
@@ -205,6 +192,12 @@ export default (i18nextInstance) => {
       .then(() => axios.get(createProxyUrl(urlValue)))
       .then((response) => handleFormResponse(response, urlValue))
       .catch((error) => {
+        console.log('error.message', error.message);
+        if (error.message === 'form.errors.enterValidURL') {
+          watchedState.form.error = error.message;
+          watchedState.form.request = 'failed';
+          return;
+        }
         if (
           error.message === 'form.errors.rssExists'
           || error.name === 'ValidationError'
