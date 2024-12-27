@@ -127,10 +127,23 @@ export default (i18nextInstance) => {
         watchedState.posts.unshift(...newPosts);
       })
       .catch((error) => {
-        console.log('Failed to update URLs:', error);
+        if (error.message === 'form.errors.enterValidURL') {
+          watchedState.form.error = error.message;
+          watchedState.form.request = 'failed';
+          return;
+        }
+        if (
+          error.message === 'form.errors.rssExists'
+          || error.name === 'ValidationError'
+        ) {
+          watchedState.form.error = error.message;
+          watchedState.form.request = 'failed';
+        } else {
+          handleFormError(error);
+        }
       })
       .finally(() => {
-        setTimeout(checkForUpdates, 5000);
+        elements.formInput.focus();
       });
   };
 
