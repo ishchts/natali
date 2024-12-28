@@ -13,22 +13,28 @@ const updateSubmitView = (state, formSubmit) => {
   const { active } = state.form.submit;
 
   if (formSubmit) {
-    formSubmit.disabled = !active;
+    const newFormSubmit = {...formSubmit, disabled: !active};
+    return newFormSubmit;
   }
+  return formSubmit;
 };
 
 const updateFormFeedback = (state, formFeedback, i18nextInstance) => {
   const hasError = Boolean(state.form.error);
+  if(!formFeedback) return formFeedback;
+
+  const newFormFeedback = {...formFeedback};
 
   if (hasError) {
-    formFeedback.classList.replace('text-success', 'text-danger');
-    formFeedback.textContent = i18nextInstance.t(state.form.error);
+    newFormFeedback.classList.replace('text-success', 'text-danger');
+    newFormFeedback.textContent = i18nextInstance.t(state.form.error);
   } else if (state.form.request === 'successful') {
-    formFeedback.classList.replace('text-danger', 'text-success');
-    formFeedback.textContent = i18nextInstance.t('successfulRequest');
+    newFormFeedback.classList.replace('text-danger', 'text-success');
+    newFormFeedback.textContent = i18nextInstance.t('successfulRequest');
   } else {
-    formFeedback.textContent = '';
+    newFormFeedback.textContent = '';
   }
+  return newFormFeedback;
 };
 
 const updatePostsView = (state, postsContainer, i18nextInstance) => {
@@ -46,7 +52,10 @@ const updatePostsView = (state, postsContainer, i18nextInstance) => {
     })
     .join('');
 
-  postsContainer.innerHTML = `<div class="card border-0">
+    if (!postsContainer) return postsContainer;
+
+    const newPostsContainer = { ...postsContainer };
+    newPostsContainer.innerHTML = `<div class="card border-0">
     <div class="card-body">
       <h2 class="card-title h4">${i18nextInstance.t('main.postsTitle')}</h2>
     </div>
@@ -54,6 +63,7 @@ const updatePostsView = (state, postsContainer, i18nextInstance) => {
       ${postsHTML}
     </ul>
   </div>`;
+  return newPostsContainer;
 };
 
 const updateFeedsView = (state, feedsContainer, i18nextInstance) => {
@@ -67,7 +77,10 @@ const updateFeedsView = (state, feedsContainer, i18nextInstance) => {
     )
     .join('');
 
-  feedsContainer.innerHTML = `<div class="card border-0">
+    if(!feedsContainer) return feedsContainer;
+
+    const newFeedsContainer = { ...feedsContainer };
+    newFeedsContainer.innerHTML = `<div class="card border-0">
     <div class="card-body">
       <h2 class="card-title h4">${i18nextInstance.t('main.feedsTitle')}</h2>
     </div>
@@ -75,6 +88,7 @@ const updateFeedsView = (state, feedsContainer, i18nextInstance) => {
       ${feedsHTML}
     </ul>
   </div>`;
+  return newFeedsContainer;
 };
 
 const updatePostReadView = ({ readPost }) => {
