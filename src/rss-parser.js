@@ -8,20 +8,20 @@ const parserRSS = (data) => {
     throw new Error(error);
   }
 
-const rssItems = rssXML.getElementsByTagName('item');
+  const rssItems = rssXML.getElementsByTagName('item');
 
-const posts = Array.from(rssItems).map((rssItem) => {
+  const posts = Array.from(rssItems).map((rssItem) => {
     const postTitle = rssItem.querySelector('title').textContent;
     const postDescription = rssItem.querySelector('description').textContent;
     const postHref = rssItem.querySelector('link').textContent;
 
     return { postTitle, postDescription, postHref };
-});
+  });
 
   const feedTitle = rssXML.querySelector('channel > title').textContent;
   const feedDescription = rssXML.querySelector(
     'channel > description',
-).textContent;
+  ).textContent;
 
   return { feedTitle, feedDescription, posts };
 };

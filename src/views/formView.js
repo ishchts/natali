@@ -13,7 +13,7 @@ const updateSubmitView = (state, formSubmit) => {
   const { active } = state.form.submit;
 
   if (formSubmit) {
-    const newFormSubmit = {...formSubmit, disabled: !active};
+    const newFormSubmit = { ...formSubmit, disabled: !active };
     return newFormSubmit;
   }
   return formSubmit;
