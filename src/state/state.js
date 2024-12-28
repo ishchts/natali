@@ -16,13 +16,14 @@ export default (i18nextInstance) => {
   });
 
   const fillElemContent = (elements, i18n) => {
-    elements.modalCloseButton.textContent = i18n.t('modalWindow.close');
-    elements.modalReadButton.textContent = i18n.t('modalWindow.read');
-    elements.headerTitle.textContent = i18n.t('header.title');
-    elements.headerParagraph.textContent = i18n.t('header.paragraph');
-    elements.formInput.placeholder = i18n.t('form.input');
-    elements.formInputLabel.textContent = i18n.t('form.input');
-    elements.formSubmitButton.textContent = i18n.t('form.submit');
+    const newElements = {...elements};
+    newElements.modalCloseButton.textContent = i18n.t('modalWindow.close');
+    newElements.modalReadButton.textContent = i18n.t('modalWindow.read');
+    newElements.headerTitle.textContent = i18n.t('header.title');
+    newElements.headerParagraph.textContent = i18n.t('header.paragraph');
+    newElements.formInput.placeholder = i18n.t('form.input');
+    newElements.formInputLabel.textContent = i18n.t('form.input');
+    newElements.formSubmitButton.textContent = i18n.t('form.submit');
   };
 
   const elements = {
@@ -67,9 +68,7 @@ export default (i18nextInstance) => {
     );
     return validationSchema
       .validate(input)
-      .then(() => {
-        return null;
-      })
+      .then(() => null)
       .catch((error) => {
         throw new Error(error.message);
       });
@@ -87,8 +86,7 @@ export default (i18nextInstance) => {
         .get(proxyUrl)
         .then((response) => {
           if (
-            response.status >= 200 && response.status < 300) 
-          {
+            response.status >= 200 && response.status < 300){
             try {
               const parsedRSS = parserRSS(response.data.contents);
               const newPosts = parsedRSS.posts
