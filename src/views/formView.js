@@ -76,11 +76,8 @@ const updateFeedsView = (state, feedsContainer, i18nextInstance) => {
       </li>`,
     )
     .join('');
-
-    if(!feedsContainer) return feedsContainer;
-
-    const newFeedsContainer = { ...feedsContainer };
-    newFeedsContainer.innerHTML = `<div class="card border-0">
+    
+  feedsContainer.innerHTML = `<div class="card border-0">
     <div class="card-body">
       <h2 class="card-title h4">${i18nextInstance.t('main.feedsTitle')}</h2>
     </div>
@@ -88,7 +85,6 @@ const updateFeedsView = (state, feedsContainer, i18nextInstance) => {
       ${feedsHTML}
     </ul>
   </div>`;
-  return newFeedsContainer;
 };
 
 const updatePostReadView = ({ readPost }) => {
