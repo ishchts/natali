@@ -9,17 +9,16 @@ async function initApp() {
   const i18nextInstance = i18next.createInstance();
   try {
     await i18nextInstance.init({
-          lng: 'ru',
+      lng: 'ru',
       debug: true,
       resources: {
         ru,
-          },
-      });
+      },
+    });
     state(i18nextInstance);
-  }
-  catch (error) {
+  } catch (error) {
           console.log("Ошибка инициализации приложения:", error);
-      };
+    };
   };
 
 initApp();
