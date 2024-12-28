@@ -1,3 +1,4 @@
+/*eslint no-param-reassign: "error"*/
 import { getTextFromHtml } from '../validators/urlValidator.js';
 
 const updateInputView = (state, formInput) => {
