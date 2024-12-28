@@ -21,16 +21,17 @@ const updateSubmitView = (state, formSubmit) => {
 
 const updateFormFeedback = (state, formFeedback, i18nextInstance) => {
   const hasError = Boolean(state.form.error);
+  const feedbackText = hasError ? i18nextInstance.t(state.form.error) : state.form.request === 'successful' ? i18nextInstance.t('successfulRequest') : '';
+
+  formFeedback.classList.remove('text-success', 'text-danger');
 
   if (hasError) {
-    formFeedback.classList.replace('text-success', 'text-danger');
-    formFeedback.textContent = i18nextInstance.t(state.form.error);
+    formFeedback.classList.add('text-danger');
   } else if (state.form.request === 'successful') {
-    formFeedback.classList.replace('text-danger', 'text-success');
-    formFeedback.textContent = i18nextInstance.t('successfulRequest');
-  } else {
-    formFeedback.textContent = '';
+    formFeedback.classList.add('text-success');
   }
+
+  formFeedback.textContent = feedbackText;
 };
 
 const updatePostsView = (state, postsContainer, i18nextInstance) => {
