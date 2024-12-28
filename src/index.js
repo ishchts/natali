@@ -17,8 +17,8 @@ async function initApp() {
     });
     state(i18nextInstance);
   } catch (error) {
-          console.log("Ошибка инициализации приложения:", error);
-    };
-  };
+    console.log('Ошибка инициализации приложения:', error);
+  }
+};
 
 initApp();
