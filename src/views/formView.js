@@ -21,7 +21,11 @@ const updateSubmitView = (state, formSubmit) => {
 
 const updateFormFeedback = (state, formFeedback, i18nextInstance) => {
   const hasError = Boolean(state.form.error);
-  const feedbackText = hasError ? i18nextInstance.t(state.form.error) : state.form.request === 'successful' ? i18nextInstance.t('successfulRequest') : '';
+  if (hasError) {
+    feedbackText = i18nextInstance.t(state.form.error);
+  } else if (state.form.request === 'successful') {
+    feedbackText = i18nextInstance.t('successfulRequest');
+  }
 
   formFeedback.classList.remove('text-success', 'text-danger');
 
