@@ -2,7 +2,7 @@ const getTextFromHtml = (html) => {
   const tempElement = document.createElement('div');
   const textNode = document.createTextNode(html);
   tempElement.appendChild(textNode);
-    return tempElement.textContent.trim() || '';
+  return tempElement.textContent.trim() || '';
 };
 
 const createProxyUrl = (url) => {

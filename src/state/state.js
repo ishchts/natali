@@ -16,7 +16,7 @@ export default (i18nextInstance) => {
   });
 
   const fillElemContent = (elements, i18n) => {
-    const newElements = {...elements};
+    const newElements = { ...elements };
     newElements.modalCloseButton.textContent = i18n.t('modalWindow.close');
     newElements.modalReadButton.textContent = i18n.t('modalWindow.read');
     newElements.headerTitle.textContent = i18n.t('header.title');
@@ -86,7 +86,7 @@ export default (i18nextInstance) => {
         .get(proxyUrl)
         .then((response) => {
           if (
-            response.status >= 200 && response.status < 300){
+            response.status >= 200 && response.status < 300) {
             try {
               const parsedRSS = parserRSS(response.data.contents);
               const newPosts = parsedRSS.posts
