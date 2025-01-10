@@ -60,7 +60,7 @@ const updatePostsView = (state, postsContainer, i18nextInstance) => {
     .join("");
 
     const newPostsContainer = document.createElement('div');
-
+    newPostsContainer.classList.add('card', 'border-0');
     newPostsContainer.innerHTML = `<div class="card border-0">
       <div class="card-body">
         <h2 class="card-title h4">${i18nextInstance.t("main.postsTitle")}</h2>
