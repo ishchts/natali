@@ -20,19 +20,23 @@ const updateSubmitView = (state, formSubmit) => {
 };
 
 const updateFormFeedback = (state, formFeedback, i18nextInstance) => {
-  const hasError = Boolean(state.form.error);
+  if (!formFeedback) {
+    return;
+  }
 
   const newFeedback = document.createElement('div');
+  newFeedback.classList.add('feedback'); 
 
-  if (hasError) {
-    newFeedback.classList.replace('text-success', 'text-danger');
+  if (state.form.error) {
+      newFeedback.classList.add('text-danger');
     newFeedback.textContent = i18nextInstance.t(state.form.error);
   } else if (state.form.request === 'successful') {
-    newFeedback.classList.replace('text-danger', 'text-success');
+        newFeedback.classList.add('text-success');
     newFeedback.textContent = i18nextInstance.t('successfulRequest');
   } else {
     newFeedback.textContent = '';
   }
+
 
   formFeedback.replaceWith(newFeedback);
 };
