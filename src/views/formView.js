@@ -24,8 +24,6 @@ const updateFormFeedback = (state, formFeedback, i18nextInstance) => {
     return;
   }
 
-   formFeedback.innerHTML = '';
-
   const newFeedback = document.createElement("div");
     newFeedback.classList.add("feedback");
 
@@ -39,7 +37,7 @@ const updateFormFeedback = (state, formFeedback, i18nextInstance) => {
     newFeedback.textContent = "";
   }
 
-  formFeedback.append(newFeedback);
+  newFeedback.replaceWith(newFeedback);
 };
 
 const updatePostsView = (state, postsContainer, i18nextInstance) => {
@@ -71,7 +69,7 @@ const updatePostsView = (state, postsContainer, i18nextInstance) => {
       ${postsHTML}
     </ul>
   </div>`;
-  postsContainer.replaceWith(newPostsContainer);
+  postsContainer.append(newPostsContainer);
 };
 
 const updateFeedsView = (state, feedsContainer, i18nextInstance) => {
