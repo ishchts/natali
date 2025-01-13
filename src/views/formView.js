@@ -24,8 +24,10 @@ const updateFormFeedback = (state, formFeedback, i18nextInstance) => {
     return;
   }
 
+   formFeedback.innerHTML = '';
+
   const newFeedback = document.createElement("div");
-  newFeedback.classList.add("feedback");
+    newFeedback.classList.add("feedback");
 
   if (state.form.error) {
     newFeedback.classList.add("text-danger");
@@ -37,7 +39,7 @@ const updateFormFeedback = (state, formFeedback, i18nextInstance) => {
     newFeedback.textContent = "";
   }
 
-  formFeedback.replaceWith(newFeedback);
+  formFeedback.append(newFeedback);
 };
 
 const updatePostsView = (state, postsContainer, i18nextInstance) => {
