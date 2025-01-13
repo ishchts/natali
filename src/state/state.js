@@ -37,7 +37,7 @@ export default (i18nextInstance) => {
     form: document.querySelector('.rss-form'),
     postsContainer: document.querySelector('.posts'),
     modalWindow: document.querySelector('.modal'),
-    //formFeedback: document.querySelector('#form-feedback'),
+    formFeedback: document.querySelector('#form-feedback'),
   };
 
   fillElemContent(elements, i18nextInstance);
