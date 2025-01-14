@@ -4,9 +4,8 @@ import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const { DefinePlugin } = require('webpack');
 
-module.exports = {
+export default {
   mode: 'process.env.NODE_ENV',
   entry: path.resolve(__dirname, './src/index.js'),
   output: {
@@ -22,9 +21,6 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'index.html'),
     }),
-    new DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
-      }),
   ],
   module: {
     rules: [
