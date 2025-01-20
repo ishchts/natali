@@ -85,7 +85,7 @@ const updateFeedsView = (state, feedsContainer, i18nextInstance) => {
     )
     .join('');
 
-  const container = feedsContainer;
+  const container = feedsContainer.cloneNode(true);
   container.innerHTML = `<div class="card border-0">
     <div class="card-body">
       <h2 class="card-title h4">${i18nextInstance.t('main.feedsTitle')}</h2>
