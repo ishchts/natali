@@ -173,6 +173,8 @@ export default (i18nextInstance) => {
       watchedState.form.error = 'errors.responseError';
     } else if (error.request) {
       watchedState.form.error = 'errors.requestError';
+    } else if (error.message === 'form.errors.rssExists') {
+      watchedState.form.error = error.message;
     } else {
       watchedState.form.error = 'errors.invalidRSS';
     }
