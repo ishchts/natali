@@ -193,20 +193,26 @@ export default (i18nextInstance) => {
       .then((response) => handleFormResponse(response, urlValue))
       .catch((error) => {
         console.log('error.message', error.message);
+
+        if (error.message === 'form.errors.rssExists') {
+          watchedState.form.error = error.message;
+          watchedState.form.request = 'failed';
+          return;
+        }
+
         if (error.message === 'form.errors.enterValidURL') {
           watchedState.form.error = error.message;
           watchedState.form.request = 'failed';
           return;
         }
-        if (
-          error.message === 'form.errors.rssExists'
-          || error.name === 'ValidationError'
-        ) {
+
+        if (error.name === 'ValidationError') {
           watchedState.form.error = error.message;
           watchedState.form.request = 'failed';
-        } else {
-          handleFormError(error);
+          return;
         }
+
+        handleFormError(error);
       })
       .finally(() => {
         elements.formInput.focus();

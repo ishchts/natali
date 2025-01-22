@@ -151,7 +151,9 @@ export default (state, path, i18nextInstance) => {
       if (formInput) {
         formInput.classList.add('is-invalid');
         formInput.setCustomValidity(state.form.error);
-        updateFormFeedback(state, formFeedback, i18nextInstance);
+        formFeedback.classList.remove('text-success');
+        formFeedback.classList.add('text-danger');
+        formFeedback.textContent = i18nextInstance.t(state.form.error);
       }
       break;
     case 'form.request':
@@ -164,6 +166,7 @@ export default (state, path, i18nextInstance) => {
           formFeedback.classList.replace('text-success', 'text-danger');
           formSubmit.disabled = false;
           formInput.disabled = false;
+          console.log(i18nextInstance.t({ rssExists: 'RSS уже существует' }));
           break;
         case 'successful':
           formFeedback.classList.replace('text-danger', 'text-success');
